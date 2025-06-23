@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sign Up - Dream Ivy</title>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+</head>
+<body>
+  <h1>Sign Up</h1>
+  <div id="g_id_onload"
+       data-client_id="379789389336-11m4fjf1tqshcj8nmfjb3ilu4slcpcp2.apps.googleusercontent.com"
+       data-context="signup"
+       data-ux_mode="popup"
+       data-callback="handleCredentialResponse"
+       data-auto_prompt="false">
+  </div>
+  <div class="g_id_signin"
+       data-type="standard"
+       data-shape="rectangular"
+       data-theme="outline"
+       data-text="continue_with"
+       data-size="large"
+       data-logo_alignment="left">
+  </div>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBbSD6JhTbyDaCRVUurdfqENMuuqTWYMmA",
+      authDomain: "dream-ivy.firebaseapp.com",
+      projectId: "dream-ivy"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    window.handleCredentialResponse = function(response) {
+      const credential = firebase.auth.GoogleAuthProvider.credential(response.credential);
+      auth.signInWithCredential(credential)
+        .then(() => window.location.href = "/pay.html")
+        .catch(error => alert("Error: " + error.message));
+    };
+  </script>
+</body>
+</html>
